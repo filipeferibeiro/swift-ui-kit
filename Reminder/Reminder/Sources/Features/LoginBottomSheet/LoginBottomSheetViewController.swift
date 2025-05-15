@@ -10,6 +10,7 @@ import UIKit
 
 class LoginBottomSheetViewController: UIViewController {
     let loginView = LoginBottomSheetView()
+    let viewModel = LoginBottomSheetViewModel()
     var handleAreaHeight: CGFloat = 50.0
     
     override func viewDidLoad() {
@@ -19,6 +20,8 @@ class LoginBottomSheetViewController: UIViewController {
         
         setupUI()
         setupGesture()
+        
+        bindViewModel()
     }
     
     private func setupUI() {
@@ -36,6 +39,12 @@ class LoginBottomSheetViewController: UIViewController {
         ])
         
         let heightConstraint = loginView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
+    }
+    
+    private func bindViewModel() {
+        viewModel.successResult = { [weak self] in
+            print("Chegou na View Controller")
+        }
     }
     
     private func setupGesture() {
@@ -62,7 +71,7 @@ class LoginBottomSheetViewController: UIViewController {
 
 extension LoginBottomSheetViewController: LoginBottomSheetViewDelegate {
     func sendLoginData(user: String, password: String) {
-        print(user, password)
+        viewModel.doAuth(usernameLogin: user, passwordLogin: password)
     }
     
     
