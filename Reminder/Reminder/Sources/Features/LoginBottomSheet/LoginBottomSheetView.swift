@@ -48,6 +48,7 @@ class LoginBottomSheetView: UIView {
         
         text.placeholder = "login.email.placeholder".localized
         text.borderStyle = .roundedRect
+        text.keyboardType = .emailAddress
         text.translatesAutoresizingMaskIntoConstraints = false
         
         return text
